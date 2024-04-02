@@ -41,7 +41,7 @@
       </div>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="/1.webp" class="d-block w-100" />
+          <img src="/iphone15.png" class="d-block w-100" />
         </div>
         <div class="carousel-item">
           <img src="/2.webp" class="d-block w-100" />
