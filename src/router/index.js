@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: () => import('@/views/home_page.vue'),
+      component: () => import('@/views/new_home.vue'),
     },
     {
       path: '/member_center',
@@ -46,6 +46,15 @@ const router = createRouter({
       path: '/member_center/member_reset_password',
       component: () => import('@/views/member_reset_password.vue'),
     },
+    {
+      path: "/product",
+      component: () => import("@/views/product_page.vue"),
+    },
+
+    {
+      path: "/iphoneIndex",
+      component: () => import("@/views/iphone_page.vue"),
+    }
     ]
 })
 
