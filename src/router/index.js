@@ -46,6 +46,10 @@ const router = createRouter({
       path: '/member_center/member_reset_password',
       component: () => import('@/views/member_reset_password.vue'),
     },
+    {
+      path: '/cart',
+      component: () => import('@/views/cart.vue'),
+}
     ]
 })
 
