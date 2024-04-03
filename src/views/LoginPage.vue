@@ -129,7 +129,7 @@ import { useUserStore } from "@/stores/userStore";
 export default {
   data() {
     return {
-      email: "amy@mail.com",
+      email: "willyjen0530@gmail.com",
       password: "12345678",
       message: "",
       isChatIcon: true, // 標記是否顯示 chat icon
