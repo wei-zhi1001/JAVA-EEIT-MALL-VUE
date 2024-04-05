@@ -24,6 +24,7 @@
       </div>
     </div>
     <hr />
+    <p class="text-center">iPhone</p>
     <div class="py-1 bg-light">
       <div class="container">
         <div class="row">
@@ -50,10 +51,14 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 text-center">
           <div class="col" v-for="p in products" :key="p.productId">
             <div class="card shadow-sm">
-              <img :src="`http://localhost:8080/mall/product/photo/${p.photoId}`" class="w-100" />
-              <p class="card-text mt-2 px-3 text-truncate">
-                {{ p.productName }}
-              </p>
+              <router-link to="/product/detail">
+              <div>
+                <img :src="`http://localhost:8080/mall/product/photo/${p.photoId}`" class="w-100" />
+                <p class="card-text mt-2 px-3 text-truncate">
+                  {{ p.productName }}
+                </p>
+              </div>
+              </router-link>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="m-3">價格:{{ p.price }}</div>
                 <div class="m-3">
@@ -82,9 +87,10 @@ export default {
   },
   mounted() {
     window.a = this
-    axios.get(`http://localhost:8080/mall/products/getProductByCategoryId?categoryId=A`).then((rs) => {
+    axios.get(`http://localhost:8080/mall/products/findProductsByCategoryId?categoryId=A&pageNumber=0`).then((rs) => {
       console.log(rs.data)
-      this.currentPage = rs.data.number;
+
+      this.currentPage =rs.data.number+1;
       this.totalPage = rs.data.totalPages;
       this.products = rs.data.content;
     });
@@ -92,7 +98,7 @@ export default {
   computed: {
     showPageBar() {
       const cp = this.currentPage;
-      const tp = this.totalPage - 1;
+      const tp = this.totalPage;
       let arr = [1];
       if (cp > 4) {
         arr.push("..")
@@ -115,11 +121,15 @@ export default {
         return
       }
       this.currentPage = p;
-    }
+    },
+
   },
   watch: {
     currentPage(newVal, oldVal) {
-      axios.get(`http://localhost:8080/mall/products/${newVal}`).then((rs) => {
+      let newPage = newVal - 1
+      // this.fetchProducts(newPage);  頁碼變化時重新計算currentPage(解決無法讀取第0頁面的狀況)
+
+      axios.get(`http://localhost:8080/mall/products/findProductsByCategoryId?categoryId=A&pageNumber=${newPage}`).then((rs) => {
         console.log(rs.data)
 
         this.totalPage = rs.data.totalPages;

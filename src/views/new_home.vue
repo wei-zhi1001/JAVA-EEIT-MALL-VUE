@@ -32,7 +32,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-5"><a class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0" href="cart.html">Add to cart</a></div>
+                    <router-link to="/cart">
+                    <div class="col-sm-5"><a class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0" >Add to cart</a></div></router-link>
                   </div><a class="btn btn-link text-dark text-decoration-none p-0" href="#!"><i class="far fa-heart me-2"></i>Add to wish list</a>
                 </div>
               </div>
@@ -43,16 +44,16 @@
     </div>
     <!-- HERO SECTION-->
     <div class="container">
-      <section class="hero pb-3 bg-cover bg-center d-flex align-items-center" style="background: url(../assets/img/hero-banner-alt.jpg)">
-        <div class="container py-5">
-          <div class="row px-4 px-lg-5">
-            <div class="col-lg-6">
-              <p class="text-muted small text-uppercase mb-2">New Inspiration 2020</p>
-              <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark" href="shop.html">Browse collections</a>
-            </div>
-          </div>
-        </div>
-      </section>
+<!--      <section class="hero pb-3 bg-cover bg-center d-flex align-items-center" style="background: url(../assets/img/hero-banner-alt.jpg)">-->
+<!--        <div class="container py-5">-->
+<!--          <div class="row px-4 px-lg-5">-->
+<!--            <div class="col-lg-6">-->
+<!--              <p class="text-muted small text-uppercase mb-2">New Inspiration 2020</p>-->
+<!--              <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark" href="shop.html">Browse collections</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </section>-->
       <!-- CATEGORIES SECTION-->
       <section class="pt-5">
         <header class="text-center">
@@ -60,20 +61,18 @@
           <h2 class="h5 text-uppercase mb-4">Browse our categories</h2>
         </header>
         <div class="row">
-          <li class="nav-item">
-            <router-link to="/product" class="nav-link active">商場</router-link>
-          </li>
+
           <div class="col-md-4">
-            <router-link to="/iphoneIndex">
+            <router-link to="/product/iphoneIndex">
               <div class="category-item">
                 <img class="img-fluid" src="@/assets/img/iphone.png" alt=""/>
                 <strong class="category-item-title">iPhone</strong>
               </div>
             </router-link>
           </div>
-          <div class="col-md-4"><router-link to="/"><div class="category-item" ><img class="img-fluid" src="../assets/img/macbook2.jpg" alt=""/><strong class="category-item-title">MacBook</strong></div></router-link>
+          <div class="col-md-4"><router-link to="/product/macbookIndex"><div class="category-item" ><img class="img-fluid" src="../assets/img/macbook2.jpg" alt=""/><strong class="category-item-title">MacBook</strong></div></router-link>
           </div>
-          <div class="col-md-4"><router-link to="/"><div class="category-item" href="shop.html"><img class="img-fluid" src="../assets/img/ipad.jpg" alt=""/><strong class="category-item-title">iPad</strong></div></router-link>
+          <div class="col-md-4"><router-link to="/product/ipadIndex"><div class="category-item" href="shop.html"><img class="img-fluid" src="../assets/img/ipad.jpg" alt=""/><strong class="category-item-title">iPad</strong></div></router-link>
           </div>
         </div>
       </section>
@@ -124,69 +123,9 @@
           </div>
         </div>
       </section>
-      <!-- NEWSLETTER-->
-      <section class="py-5">
-        <div class="container p-0">
-          <div class="row gy-3">
-            <div class="col-lg-6">
-              <h5 class="text-uppercase">Let's be friends!</h5>
-              <p class="text-sm text-muted mb-0">Nisi nisi tempor consequat laboris nisi.</p>
-            </div>
-            <div class="col-lg-6">
-              <form action="#">
-                <div class="input-group">
-                  <input class="form-control form-control-lg" type="email" placeholder="Enter your email address" aria-describedby="button-addon2">
-                  <button class="btn btn-dark" id="button-addon2" type="submit">Subscribe</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+
     </div>
-    <footer class="bg-dark text-white">
-      <div class="container py-4">
-        <div class="row py-5">
-          <div class="col-md-4 mb-3 mb-md-0">
-            <h6 class="text-uppercase mb-3">Customer services</h6>
-            <ul class="list-unstyled mb-0">
-              <li><a class="footer-link" href="#!">Help &amp; Contact Us</a></li>
-              <li><a class="footer-link" href="#!">Returns &amp; Refunds</a></li>
-              <li><a class="footer-link" href="#!">Online Stores</a></li>
-              <li><a class="footer-link" href="#!">Terms &amp; Conditions</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <h6 class="text-uppercase mb-3">Company</h6>
-            <ul class="list-unstyled mb-0">
-              <li><a class="footer-link" href="#!">What We Do</a></li>
-              <li><a class="footer-link" href="#!">Available Services</a></li>
-              <li><a class="footer-link" href="#!">Latest Posts</a></li>
-              <li><a class="footer-link" href="#!">FAQs</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h6 class="text-uppercase mb-3">Social media</h6>
-            <ul class="list-unstyled mb-0">
-              <li><a class="footer-link" href="#!">Twitter</a></li>
-              <li><a class="footer-link" href="#!">Instagram</a></li>
-              <li><a class="footer-link" href="#!">Tumblr</a></li>
-              <li><a class="footer-link" href="#!">Pinterest</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="border-top pt-4" style="border-color: #1d1d1d !important">
-          <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-              <p class="small text-muted mb-0">&copy; All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-              <p class="small text-muted mb-0"><a target="_blank" href="http://www.mobanwang.com/" title="网页模板" class="text-white reset-anchor">网页模板</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </div>
