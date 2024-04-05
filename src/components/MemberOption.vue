@@ -80,6 +80,14 @@
                 <label>填寫訂單意見</label>
               </router-link>
             </li>
+            <li class="list-group-item">
+              <router-link
+                  to="/MemberCenter/CustomerFeedbackAdd"
+                  class="nav-link px-2 text-white"
+              >
+                填寫訂單意見
+              </router-link>
+            </li>
 
             <li class="list-group-item">
               <router-link
