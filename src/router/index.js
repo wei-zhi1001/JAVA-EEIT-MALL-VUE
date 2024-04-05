@@ -5,26 +5,11 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: () => import('@/views/home_page.vue'),
+      component: () => import('@/views/new_home.vue'),
     },
     {
       path: '/member_center',
       component: () => import('@/views/member_center.vue'),
-      // children: [
-      //   {
-      //     path: '/', // 空路徑表示默認頁面，例如/member
-      //     component: () => import('@/views/member_center.vue'),
-      //   },
-      //   {
-      //     path: 'track',
-      //     component: () => import('@/views/member_track.vue'),
-      //   },
-      //   {
-      //     path: 'customer_feedback',
-      //     component: () => import('@/views/member_feedback.vue'),
-      //   },
-      //   // 其他子路由...
-      // ]
      },
     {
       path: '/member_center/track',
@@ -47,10 +32,48 @@ const router = createRouter({
       component: () => import('@/views/member_reset_password.vue'),
     },
     {
-      path: '/cart',
-      component: () => import('@/views/cart.vue'),
-}
+      path: "/product",
+      component: () => import("@/views/product_page.vue"),
+    },
+    {
+      path: "/iphoneIndex",
+      component: () => import("@/views/iphone_page.vue"),
+    },
+    {
+      path: "/login",
+      component: () => import("@/views/LoginPage.vue"),
+    },
+    {
+      path: "/register",
+      component: () => import("@/views/RegisterPage.vue"),
+    },
+    {
+      path: "/forget",
+      component: () => import("@/views/ForgetPassword.vue"),
+    },
+    {
+      path: "/OLoginSuccess",
+      component: () => import("@/views/Oath2LoginSuccess.vue"),
+    },
+    {
+      path: "/cart",
+      component: () => import("@/views/Cart.vue"),
+    },
+    {
+      path: "/checkout/paypal",
+      component: () => import("@/views/payment/Paypal.vue"),
+      name: "paypal",
+    },
+    {
+      path: "/checkout/linepay",
+      component: () => import("@/views/payment/Linepay.vue"),
+    },
+    {
+      path: "/checkout/stripe",
+      component: () => import("@/views/payment/Stripe.vue"),
+    },
     ]
-})
+});
+
 
 export default router

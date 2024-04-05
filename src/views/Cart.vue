@@ -3,48 +3,39 @@
     <div class="container py-5">
       <div class="row">
         <div class="col-lg-8">
-
           <!-- Shopping Cart Header -->
           <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="free-shipping-banner">
               <span class="free-shipping-text">Your order qualifies for free shipping!</span>
               <div class="striped-bar"></div>
             </div>
-
-            <div>
-              排序：
-              <select class="form-select" v-model="selectedSort" @change="sortItems">
-                <option value="price-asc">價格低至高</option>
-                <option value="price-desc">價格高至低</option>
-              </select>
-            </div>
           </div>
 
           <!-- Column Titles -->
-          <div class="row text-muted mb-3 text-center align-items-center">
+          <div class="row text-muted mb-3 text-lg align-items-center">
             <div class="col-1">移除</div>
             <div class="col-2">圖片</div>
             <div class="col-3">商品</div>
             <div class="col-2">數量</div>
-            <div class="col-2">價格</div>
-            <div class="col-2">小計</div>
+            <div class="col-2 text-center">價格</div>
+            <div class="col-2 text-center">小計</div>
           </div>
 
           <!-- Product List -->
-          <div v-for="item in cartItems" :key="item.productId" class="card mb-3">
+          <div v-for="item in cartItems" :key="item.cartItemId" class="card mb-3">
             <div class="card-body">
               <div class="row align-items-center">
 
                 <!-- Remove Item Column -->
-                <div class="col-1 text-center">
-                  <a href="#" class="text-danger" @click.prevent="deleteCartItem(item.productId)">
+                <div class="col-auto text-center">
+                  <a href="#" class="text-secondary" @click.prevent="deleteCartItem(item.cartItemId)">
                     <i class="fas fa-times"></i>
                   </a>
                 </div>
 
                 <!-- Product Image Column -->
                 <div class="col-2 text-center">
-                  <img :src="`${API_URL}/product/photo/${item.productPhotoId}`" class="img-fluid" alt="product">
+                  <img :src="getPhotoUrl(item.photoFile)" class="img-fluid" alt="product">
                 </div>
 
                 <!-- Product Name Column -->
@@ -62,12 +53,12 @@
                 </div>
 
                 <!-- Product Price Column -->
-                <div class="col-2 text-center">
+                <div class="col-2 text-end">
                   <span class="text-secondary">{{ item.productPrice }}</span>
                 </div>
 
                 <!-- Product Subtotal Column -->
-                <div class="col-2 text-center">
+                <div class="col-2 text-end">
                   <span class="text-secondary">{{ item.subtotal }}</span>
                 </div>
               </div>
@@ -87,21 +78,21 @@
               <h6 class="options-title">運送方式</h6>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="deliveryOption" id="pickup-center"
-                  value="pickup-center" v-model="deliveryOption">
+                       value="pickup-center" v-model="deliveryOption">
                 <label class="form-check-label" for="pickup-center">
                   自行取貨 (商品體驗中心)
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="deliveryOption" id="pickup-hq" value="pickup-hq"
-                  v-model="deliveryOption">
+                       v-model="deliveryOption">
                 <label class="form-check-label" for="pickup-hq">
                   自行取貨 (總公司)
                 </label>
               </div>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="deliveryOption" id="free-shipping"
-                  value="free-shipping" v-model="deliveryOption">
+                       value="free-shipping" v-model="deliveryOption">
                 <label class="form-check-label" for="free-shipping">
                   免費運送
                 </label>
@@ -111,9 +102,36 @@
               <span class="total-title">總計</span>
               <span class="total-price">{{ total }}</span>
             </div>
-            <router-link to="/checkout" class="btn-checkout">
-              <button class="checkout-btn">結帳</button>
-            </router-link>
+
+            <div class="payment-options">
+              <h3 class="payment-title">付款方式</h3>
+              <div class="payment-options-container">
+              <!-- Paypal -->
+<!--                <button @click="proceedToCheckout">Proceed to Checkout</button>-->
+                <router-link :to="{ path: '/checkout/paypal', query: { subtotal: total  } }" class="payment-option">
+                  <div class="payment-option-content">
+                    <img src="@/assets/paymentImg/paypal.png" alt="Paypal" class="payment-icon">
+                    <span>Paypal</span>
+                  </div>
+                </router-link>
+
+              <!-- Linepay -->
+                <router-link :to="{ path: '/checkout/linepay', query: { subtotal: total  } }" class="payment-option">
+                  <div class="payment-option-content">
+                    <img src="@/assets/paymentImg/linepay.png" alt="Linepay" class="payment-icon">
+                    <span>Linepay</span>
+                  </div>
+                </router-link>
+
+                <router-link :to="{ path: '/checkout/stripe', query: { subtotal: total  } }" class="payment-option">
+                  <div class="payment-option-content">
+                    <img src="@/assets/paymentImg/stripe.png" alt="Stripe" class="payment-icon">
+                    <span>Stripe</span>
+                  </div>
+                </router-link>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -123,98 +141,96 @@
 
 <script>
 import axios from "axios";
-
+// import { mapActions } from 'vuex';
 export default {
   data() {
     return {
       cartItems: [],
-      // selectedSort: 'price-asc',
+      indexHtml: '',
     };
   },
   computed: {
-    // sortedCartItems() {
-    //   let sortedArray = [...this.cartItems];
-    //   if (this.selectedSort === 'price-asc') {
-    //     sortedArray.sort((a, b) => a.productPrice - b.productPrice);
-    //   } else if (this.selectedSort === 'price-desc') {
-    //     sortedArray.sort((a, b) => b.productPrice - a.productPrice);
-    //   }
-    //
-    //   return sortedArray.map(item => ({
-    //     ...item,
-    //     subtotal: item.productPrice * item.quantity,
-    //   }));
-    // },
-    // cartWithSubtotals() {
-    //   return this.cartItems.map(item => ({
-    //
-    //     ...item,
-    //     subtotal: item.productPrice * item.quantity,
-    //
-    //   })
-    //   );
-    // },
     total() {
-      return this.cartItems.reduce((sum, item) => sum + item.productPrice * item.quantity, 0);
+      return this.cartItems.reduce((total, item) => total + item.subtotal, 0);
     },
-  },
-  mounted() {
-    axios
-      .get(`${this.API_URL}/cart`)
-      .then((rs) => {
-        this.cartItems = rs.data;
-      })
-      .catch((err) => {
-        console.error(err);
-        alert("未登入!");
-      });
   },
   methods: {
-    deleteCartItem(cartItemId) {
-      axios
-        .delete(`${this.API_URL}/cart/item/${cartItemId}`)
-        .then(() => {
-          this.cartItems = this.cartItems.filter(item => item.productId !== cartItemId);
+    async proceedToCheckout() {
+      try {
+        // this.$router.push({ path: '/checkout/paypal', query: { total: this.total } });
 
-        })
-        .catch(error => {
-          console.error("delete fail", error);
+      } catch (error) {
+        console.error(error);
+
+        alert("Failed to proceed to checkout!");
+      }
+    },
+    async fetchCartItems() {
+      try {
+        const response = await axios.get(`${this.API_URL}/cart`);
+        this.cartItems = response.data;
+        this.cartItems.forEach(item => {
+          this.updateSubtotal(item);
         });
-    },
-    increment(item) {
-      const index = this.cartItems.findIndex(i => i.productId === item.productId);
-      if (index !== -1) {
-        this.cartItems[index].quantity++;
+      } catch (error) {
+        console.error(error);
+        alert("Please log in!");
       }
     },
-    decrement(item) {
-      const index = this.cartItems.findIndex(i => i.productId === item.productId);
-      if (index !== -1 && this.cartItems[index].quantity > 1) {
-        this.cartItems[index].quantity--;
+    async deleteCartItem(cartItemId) {
+      try {
+        await axios.delete(`${this.API_URL}/cart/item/${cartItemId}`);
+        // After deleting, fetch the updated cart items
+        await this.fetchCartItems();
+      } catch (error) {
+        console.error(error);
+        alert("Failed to delete item from cart!");
       }
     },
-    
-      sortItems() {
-        // This method is triggered when the selected option changes.
-        // The sortedCartItems computed property will automatically update.
-      },
-    
-  }
+    async decrement(item) {
+      if (item.quantity > 1) {
+        item.quantity--;
+        await this.updateCartItemQuantity(item.cartItemId, item.quantity);
+        this.updateSubtotal(item);
+      }
+    },
+    async increment(item) {
+      item.quantity++;
+      await this.updateCartItemQuantity(item.cartItemId, item.quantity)
+      this.updateSubtotal(item);
+    },
+    async updateCartItemQuantity(cartItemId, quantity) {
+      try {
+        const cartDto = { cartItemId, quantity };
+        const response = await axios.put(`${this.API_URL}/cart/${cartItemId}`, cartDto);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+        alert("Failed to update cart item quantity!");
+      }
+    },
+    updateSubtotal(item) {
+      item.subtotal = item.quantity * item.productPrice;
+    },
+    getPhotoUrl(photoFile) {
+      if (photoFile) {
+        const blob = new Blob([photoFile], { type: 'image/jpeg' });
+        return URL.createObjectURL(blob);
+      } else {
+        return 'placeholder_image_url.jpg';
+      }
+    }
+  },
+  mounted() {
+    // this.updateCartItemCount();
+    this.fetchCartItems();
+  },
 };
 </script>
 
 <style>
-.list-item {
-  border-bottom: 1px solid #e0e0e0;
-  /* padding: 1rem; */
-}
-
-.quantity-selector {
-  /* padding-top: 15px; */
-  border-radius: 20px;
-  width: 150px;
-  height: 30px;
-  border: none;
+.form-control{
+  min-width:35px;
 }
 
 .quantity-selector input {
@@ -296,20 +312,41 @@ input[type="number"] {
   margin-bottom: 20px;
 }
 
-
-
-.checkout-btn {
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 4px;
-  width: 100%;
-  cursor: pointer;
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
-.checkout-btn:hover {
-  background-color: #0056b3;
+.payment-title {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.payment-options-container {
+  width: 280px;
+  display: flex;
+  justify-content: space-between;
+}
+.payment-option {
+  text-align: center;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.payment-option-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.payment-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.payment-options h3 {
+  margin-bottom: 20px;
 }
 </style>
