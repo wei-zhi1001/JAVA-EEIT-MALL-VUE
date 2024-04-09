@@ -1,4 +1,8 @@
 <template >
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+  />
   <body>
   <div class="page-holder">
 
@@ -32,7 +36,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-sm-5"><a class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0" href="cart.html">Add to cart</a></div>
+                    <router-link to="/cart">
+                    <div class="col-sm-5"><a class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0" >Add to cart</a></div></router-link>
                   </div><a class="btn btn-link text-dark text-decoration-none p-0" href="#!"><i class="far fa-heart me-2"></i>Add to wish list</a>
                 </div>
               </div>
@@ -43,16 +48,16 @@
     </div>
     <!-- HERO SECTION-->
     <div class="container">
-      <section class="hero pb-3 bg-cover bg-center d-flex align-items-center" style="background: url(../assets/img/hero-banner-alt.jpg)">
-        <div class="container py-5">
-          <div class="row px-4 px-lg-5">
-            <div class="col-lg-6">
-              <p class="text-muted small text-uppercase mb-2">New Inspiration 2020</p>
-              <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark" href="shop.html">Browse collections</a>
-            </div>
-          </div>
-        </div>
-      </section>
+<!--      <section class="hero pb-3 bg-cover bg-center d-flex align-items-center" style="background: url(../assets/img/hero-banner-alt.jpg)">-->
+<!--        <div class="container py-5">-->
+<!--          <div class="row px-4 px-lg-5">-->
+<!--            <div class="col-lg-6">-->
+<!--              <p class="text-muted small text-uppercase mb-2">New Inspiration 2020</p>-->
+<!--              <h1 class="h2 text-uppercase mb-3">20% off on new season</h1><a class="btn btn-dark" href="shop.html">Browse collections</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </section>-->
       <!-- CATEGORIES SECTION-->
       <section class="pt-5">
         <header class="text-center">
@@ -60,20 +65,18 @@
           <h2 class="h5 text-uppercase mb-4">Browse our categories</h2>
         </header>
         <div class="row">
-          <li class="nav-item">
-            <router-link to="/product" class="nav-link active">商場</router-link>
-          </li>
+
           <div class="col-md-4">
-            <router-link to="/iphoneIndex">
+            <router-link to="/product/iphoneIndex">
               <div class="category-item">
                 <img class="img-fluid" src="@/assets/img/iphone.png" alt=""/>
                 <strong class="category-item-title">iPhone</strong>
               </div>
             </router-link>
           </div>
-          <div class="col-md-4"><router-link to="/"><div class="category-item" ><img class="img-fluid" src="../assets/img/macbook2.jpg" alt=""/><strong class="category-item-title">MacBook</strong></div></router-link>
+          <div class="col-md-4"><router-link to="/product/macbookIndex"><div class="category-item" ><img class="img-fluid" src="../assets/img/macbook2.jpg" alt=""/><strong class="category-item-title">MacBook</strong></div></router-link>
           </div>
-          <div class="col-md-4"><router-link to="/"><div class="category-item" href="shop.html"><img class="img-fluid" src="../assets/img/ipad.jpg" alt=""/><strong class="category-item-title">iPad</strong></div></router-link>
+          <div class="col-md-4"><router-link to="/product/ipadIndex"><div class="category-item" href="shop.html"><img class="img-fluid" src="../assets/img/ipad.jpg" alt=""/><strong class="category-item-title">iPad</strong></div></router-link>
           </div>
         </div>
       </section>
@@ -124,73 +127,36 @@
           </div>
         </div>
       </section>
-      <!-- NEWSLETTER-->
-      <section class="py-5">
-        <div class="container p-0">
-          <div class="row gy-3">
-            <div class="col-lg-6">
-              <h5 class="text-uppercase">Let's be friends!</h5>
-              <p class="text-sm text-muted mb-0">Nisi nisi tempor consequat laboris nisi.</p>
-            </div>
-            <div class="col-lg-6">
-              <form action="#">
-                <div class="input-group">
-                  <input class="form-control form-control-lg" type="email" placeholder="Enter your email address" aria-describedby="button-addon2">
-                  <button class="btn btn-dark" id="button-addon2" type="submit">Subscribe</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </section>
+
     </div>
-    <footer class="bg-dark text-white">
-      <div class="container py-4">
-        <div class="row py-5">
-          <div class="col-md-4 mb-3 mb-md-0">
-            <h6 class="text-uppercase mb-3">Customer services</h6>
-            <ul class="list-unstyled mb-0">
-              <li><a class="footer-link" href="#!">Help &amp; Contact Us</a></li>
-              <li><a class="footer-link" href="#!">Returns &amp; Refunds</a></li>
-              <li><a class="footer-link" href="#!">Online Stores</a></li>
-              <li><a class="footer-link" href="#!">Terms &amp; Conditions</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <h6 class="text-uppercase mb-3">Company</h6>
-            <ul class="list-unstyled mb-0">
-              <li><a class="footer-link" href="#!">What We Do</a></li>
-              <li><a class="footer-link" href="#!">Available Services</a></li>
-              <li><a class="footer-link" href="#!">Latest Posts</a></li>
-              <li><a class="footer-link" href="#!">FAQs</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h6 class="text-uppercase mb-3">Social media</h6>
-            <ul class="list-unstyled mb-0">
-              <li><a class="footer-link" href="#!">Twitter</a></li>
-              <li><a class="footer-link" href="#!">Instagram</a></li>
-              <li><a class="footer-link" href="#!">Tumblr</a></li>
-              <li><a class="footer-link" href="#!">Pinterest</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="border-top pt-4" style="border-color: #1d1d1d !important">
-          <div class="row">
-            <div class="col-md-6 text-center text-md-start">
-              <p class="small text-muted mb-0">&copy; All rights reserved.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-              <p class="small text-muted mb-0"><a target="_blank" href="http://www.mobanwang.com/" title="网页模板" class="text-white reset-anchor">网页模板</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+
     <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   </div>
   </body>
+  <button class="fixed-button" @click="toggleButtons">
+    <i :class="iconClass"></i>
+    <!-- 使用 Font Awesome 中的 chat icon 或叉叉 icon -->
+  </button>
+
+  <!-- 彈出的按鈕列表 -->
+  <transition name="slide">
+    <div v-if="isButtonsVisible" class="buttons-container">
+      <button class="sub-button">
+        <a href="https://m.me/282020441655310" target="_blank">
+          <i class="fab fa-facebook-messenger"></i>
+        </a>
+      </button>
+      <button class="sub-button">
+        <a
+            href="https://page.line.me/003cdcek?openQrModal=true"
+            target="_blank"
+        ><i class="bi bi-line"></i
+        ></a>
+      </button>
+      <button class="sub-button"><i class="fab fa-whatsapp"></i></button>
+    </div>
+  </transition>
 </template>
 
 
@@ -229,10 +195,145 @@ injectSvgSprite('icons/orion-svg-sprite.svg');
 
 // 样式文件路径根据实际情况修改
 export default {
+  data() {
+    return {
+      isChatIcon: true, // 標記是否顯示 chat icon
+      isRotating: false, // 標記是否正在旋轉中
+      isButtonsVisible: false, // 標記彈出的按鈕列表是否可見
+    };
+  },
+  computed: {
+    iconClass() {
+      return this.isChatIcon ? "fas fa-comment" : "fas fa-times"; // 使用 Font Awesome 中的 chat icon 或叉叉 icon
+    },
+  },
+  methods: {
+    async toggleButtons() {
+      if (this.isRotating) return; // 如果已經在旋轉中，則不執行
 
-}
+      this.isRotating = true; // 開始旋轉
+
+      await this.rotateIcon(); // 旋轉 icon
+
+      // 切換 icon
+      this.isChatIcon = !this.isChatIcon;
+
+      this.isButtonsVisible = !this.isButtonsVisible; // 切換彈出的按鈕列表的可見狀態
+
+      //await this.rotateIcon(); // 再次旋轉 icon
+
+      this.isRotating = false; // 結束旋轉
+    },
+    rotateIcon() {
+      return new Promise((resolve) => {
+        const button = document.querySelector(".fixed-button");
+        button.classList.add("rotate");
+
+        // 監聽旋轉動畫結束事件
+        button.addEventListener("animationend", () => {
+          button.classList.remove("rotate");
+          resolve();
+        });
+      });
+    },
+  },
+};
 </script>
 <style>
+.fixed-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px; /* 設置寬度和高度相等，使其呈現圓形 */
+  height: 50px;
+  border-radius: 50%; /* 圓形邊框 */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  /* 將內容居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* 調整 icon 大小 */
+.fixed-button i {
+  font-size: 25px;
+}
+.sub-button {
+  bottom: 20px;
+  right: 20px;
+  width: 50px; /* 設置寬度和高度相等，使其呈現圓形 */
+  height: 50px;
+  border-radius: 50%; /* 圓形邊框 */
+  background-color: #2784e7;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  /* 將內容居中 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sub-button i {
+  font-size: 25px; /* 調整圖標大小 */
+}
+
+/* 旋轉動畫 */
+.rotate {
+  animation: rotateIcon 0.3s linear;
+}
+
+@keyframes rotateIcon {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+/* 按鈕列表容器 */
+.buttons-container {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.slide-enter, .slide-leave-to /* .slide-leave-active below version 2.1.8 */ {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slide-enter-to, .slide-leave /* .slide-enter-active below version 2.1.8 */ {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* 彈出的按鈕 */
+.sub-button {
+  margin-top: 10px;
+}
+
+a {
+  color: inherit; /* 使用父元素的文字顏色 */
+  text-decoration: none; /* 取消下劃線 */
+}
+a:link {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
 
 
 </style>

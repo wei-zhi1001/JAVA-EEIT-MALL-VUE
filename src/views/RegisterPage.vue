@@ -8,7 +8,7 @@
               <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
                   <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                    歡迎來到3C Mall!立即註冊會員，享受最優質的購物體驗！
+                    歡迎來到APPLE TREE!立即註冊會員，享受最優質的購物體驗！
                   </p>
 
                   <form class="mx-1 mx-md-4">
@@ -42,7 +42,7 @@
                           type="button"
                           class="btn btn-outline-primary btn-sm"
                           @click="generateVerificationCode"
-                          :disabled="disabled"
+                          :disabled="disableButton"
                         >
                           驗證
                         </button>
@@ -169,11 +169,12 @@ export default {
       verificationCode2: "", // 使用者輸入的驗證碼
       message: "",
       message2: "",
+      disableButton: false,
     };
   },
   methods: {
     register() {
-      if (this.verificationCode2 != this.verificationCode) {
+      if (verificationCode2==""||this.verificationCode2 != this.verificationCode) {
         this.message = "驗證碼錯誤";
       } else if (this.password != this.password2) {
         this.message = "兩次輸入的密碼不相符";
@@ -215,15 +216,15 @@ export default {
         this.message2 = "  錯誤的信箱！";
         return;
       } else {
-        this.disabled = true; // 禁用按鈕
-
+        this.disableButton = true; // 禁用按鈕
+        this.message2 = "  驗證碼發送中...";
         this.verificationCode = this.generateRandomCode();
         const fd = new FormData();
         fd.append("email", this.email);
         fd.append("verificationCode", this.verificationCode);
 
         axios
-          .post(`${this.API_URL}/user/mail/verify`, fd)
+          .get(`${this.API_URL}/user/mail/verify`, fd)
           .then((rs) => {
             this.message2 = "  驗證碼已發送至您的信箱！";
             this.showVerificationCode = true;
@@ -235,11 +236,11 @@ export default {
         setTimeout(() => {
           this.message2 =
             "  沒有收到驗證碼？請檢查信箱是否正確後，再次點擊驗證。";
-          this.disabled = false; // 啟用按鈕
+          this.disableButton = false; // 啟用按鈕
         }, 30000);
         setTimeout(() => {
-          this.verificationCode = ""; // 5分鐘後清空驗證碼
-        }, 300000);
+          this.verificationCode = ""; // 10分鐘後清空驗證碼
+        }, 600000);
       }
     },
   },

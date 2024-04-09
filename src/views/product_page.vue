@@ -1,5 +1,23 @@
 <template>
+
   <main>
+    <section class="py-5 bg-light">
+      <div class="container">
+        <div class="row px-4 px-lg-5 py-lg-4 align-items-center">
+          <div class="col-lg-6">
+            <h1 class="h2 text-uppercase mb-0">shop</h1>
+          </div>
+          <div class="col-lg-6 text-lg-end">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb justify-content-lg-end mb-0 px-0 bg-light">
+                <li class="breadcrumb-item"><a class="text-dark" href="index.html">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">shop</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
     <div class="container mb-3">
       <div class="row align-items-center text-center">
         <div class="col-1">
@@ -117,19 +135,11 @@ export default {
       }
       this.currentPage = p;
     },
-    // fetchProducts(page) {
-    //   axios.get(`http://localhost:8080/mall/products/${page}`).then((rs) => {
-    //     console.log(rs.data)
-    //     this.currentPage = rs.data.number;
-    //     this.totalPage = rs.data.totalPages;
-    //     this.products = rs.data.content;
-    //   });
-    // }
+
   },
   watch: {
     currentPage(newVal, oldVal) {
-      let newPage = newVal - 1
-      // this.fetchProducts(newPage);  頁碼變化時重新計算currentPage(解決無法讀取第0頁面的狀況)
+      let newPage = newVal - 1  // 頁碼變化時重新計算currentPage(解決無法讀取第0頁面的狀況)
 
       axios.get(`http://localhost:8080/mall/products/${newPage}`).then((rs) => {
         console.log(rs.data)

@@ -10,6 +10,7 @@ const router = createRouter({
     {
       path: '/member_center',
       component: () => import('@/views/member_center.vue'),
+
      },
     {
       path: '/member_center/track',
@@ -31,49 +32,51 @@ const router = createRouter({
       path: '/member_center/member_reset_password',
       component: () => import('@/views/member_reset_password.vue'),
     },
+
     {
       path: "/product",
       component: () => import("@/views/product_page.vue"),
     },
-    {
-      path: "/iphoneIndex",
-      component: () => import("@/views/iphone_page.vue"),
-    },
-    {
-      path: "/login",
-      component: () => import("@/views/LoginPage.vue"),
-    },
-    {
-      path: "/register",
-      component: () => import("@/views/RegisterPage.vue"),
-    },
-    {
-      path: "/forget",
-      component: () => import("@/views/ForgetPassword.vue"),
-    },
-    {
-      path: "/OLoginSuccess",
-      component: () => import("@/views/Oath2LoginSuccess.vue"),
-    },
+        {
+          path: "/product/iphoneIndex",
+          component: () => import("@/views/iphone_page.vue"),
+        },
+        {
+          path: "/product/ipadIndex",
+          component: () => import("@/views/ipad_page.vue"),
+        },
+        {
+          path: "/product/macbookIndex",
+          component: () => import("@/views/macbook_page.vue"),
+        },
+        {
+          path: "/product/detail",
+          component: () => import("@/views/product_detail_page.vue"),
+        },
     {
       path: "/cart",
-      component: () => import("@/views/Cart.vue"),
+      component: () => import("@/views/cart_page.vue"),
     },
-    {
-      path: "/checkout/paypal",
-      component: () => import("@/views/payment/Paypal.vue"),
-      name: "paypal",
-    },
-    {
-      path: "/checkout/linepay",
-      component: () => import("@/views/payment/Linepay.vue"),
-    },
-    {
-      path: "/checkout/stripe",
-      component: () => import("@/views/payment/Stripe.vue"),
-    },
-    ]
-});
+      {
+          path: "/login",
+          component: () => import("@/views/LoginPage.vue"),
+      },
+      {
+          path: "/register",
+          component: () => import("@/views/RegisterPage.vue"),
+      },
+      {
+          path: "/forget",
+          component: () => import("@/views/ForgetPassword.vue"),
+      },
+      {
+          path: "/OLoginSuccess",
+          component: () => import("@/views/Oath2LoginSuccess.vue"),
+      },
 
+
+
+  ]
+})
 
 export default router

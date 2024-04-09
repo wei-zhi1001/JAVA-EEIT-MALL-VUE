@@ -22,7 +22,7 @@
           </div>
           <div class="form-floating mb-3">
             <input
-              type="text"
+              type="password"
               class="form-control"
               placeholder="Password"
               v-model="password"
@@ -51,6 +51,9 @@
               @click.prevent="gotoGoogleLoginPage"
             >
               <i class="fab fa-google"></i>
+            </button>
+            <button type="button" class="btn btn-link btn-floating mx-1" @click.prevent="gotoLineLoginPage">
+              <i class="fab fa-line"></i>
             </button>
           </div>
         </form>
@@ -93,6 +96,9 @@ export default {
     },
     gotoGoogleLoginPage() {
       window.location.href = "http://localhost:8080/mall/google-login";
+    },
+    gotoLineLoginPage() {
+      window.location.href = "http://localhost:8080/mall/line-login";
     },
   },
 };
