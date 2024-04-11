@@ -73,7 +73,7 @@
               <span class="item-title">小計</span>
               <span class="item-price">{{ total }}</span>
             </div>
-            <!-- Repeat for other summary items if needed -->
+            <!-- Other summary items if needed -->
             <div class="summary-options">
               <h6 class="options-title">運送方式</h6>
               <div class="form-check">
@@ -97,40 +97,17 @@
                   免費運送
                 </label>
               </div>
+              <p v-if="errorMsg1" class="error-message">{{ errorMsg1 }}</p>
             </div>
+
             <div class="summary-total">
               <span class="total-title">總計</span>
               <span class="total-price">{{ total }}</span>
             </div>
-
-            <div class="payment-options">
-              <h3 class="payment-title">付款方式</h3>
-              <div class="payment-options-container">
-              <!-- Paypal -->
-<!--                <button @click="proceedToCheckout">Proceed to Checkout</button>-->
-                <router-link :to="{ path: '/checkout/paypal', query: { subtotal: total  } }" class="payment-option">
-                  <div class="payment-option-content">
-                    <img src="@/assets/paymentImg/paypal.png" alt="Paypal" class="payment-icon">
-                    <span>Paypal</span>
-                  </div>
-                </router-link>
-
-              <!-- Linepay -->
-                <router-link :to="{ path: '/checkout/linepay', query: { subtotal: total  } }" class="payment-option">
-                  <div class="payment-option-content">
-                    <img src="@/assets/paymentImg/linepay.png" alt="Linepay" class="payment-icon">
-                    <span>Linepay</span>
-                  </div>
-                </router-link>
-
-                <router-link :to="{ path: '/checkout/stripe', query: { subtotal: total  } }" class="payment-option">
-                  <div class="payment-option-content">
-                    <img src="@/assets/paymentImg/stripe.png" alt="Stripe" class="payment-icon">
-                    <span>Stripe</span>
-                  </div>
-                </router-link>
-
-              </div>
+            <!-- Button wrapper for centering -->
+            <div class="button-container">
+              <p v-if="errorMsg2" class="error-message">{{ errorMsg2 }}</p>
+              <button class="btn btn-primary" @click="checkDeliveryOption('/checkout')">結帳</button>
             </div>
           </div>
         </div>
@@ -141,12 +118,16 @@
 
 <script>
 import axios from "axios";
-// import { mapActions } from 'vuex';
+import { useCheckoutStore } from '@/stores/checkoutStore';
+
 export default {
   data() {
     return {
       cartItems: [],
-      indexHtml: '',
+      deliveryOption: null,
+      errorMsg1: '',
+      errorMsg2: '',
+      total: 0
     };
   },
   computed: {
@@ -155,14 +136,13 @@ export default {
     },
   },
   methods: {
-    async proceedToCheckout() {
+    async initializeCart() {
       try {
-        // this.$router.push({ path: '/checkout/paypal', query: { total: this.total } });
-
+        await this.fetchCartItems(); // 等待購物車項目的數據拉取完成
+        this.updateTotal(); // 當購物車項目更新後計算總計
       } catch (error) {
-        console.error(error);
-
-        alert("Failed to proceed to checkout!");
+        console.error("Failed to initialize cart items: ", error);
+        alert("Failed to load cart data!");
       }
     },
     async fetchCartItems() {
@@ -177,6 +157,29 @@ export default {
         alert("Please log in!");
       }
     },
+    checkDeliveryOption(path) {
+      if (this.cartItems.length === 0) {
+        this.errorMsg2 = "請選取商品"; // Error message for empty cart
+      } else if (!this.deliveryOption) {
+        this.errorMsg1 = "請選擇運送方式"; // Error message for no delivery option selected
+      } else {
+        this.errorMsg1 = '';
+        this.errorMsg2 = '';
+        this.proceedToCheckout(path);
+      }
+    },
+    proceedToCheckout() {
+      const checkoutStore = useCheckoutStore();
+      const cartItems = this.cartItems; // assuming cartItems is your reactive cart data array
+      const orderDetails = cartItems.map(item => ({
+        specId: item.specId,
+        quantity: item.quantity,
+        price: item.quantity * item.productPrice
+      }));
+      checkoutStore.addOrderDetails(orderDetails);
+      this.$router.push('/checkout');
+    },
+
     async deleteCartItem(cartItemId) {
       try {
         await axios.delete(`${this.API_URL}/cart/item/${cartItemId}`);
@@ -212,18 +215,26 @@ export default {
     updateSubtotal(item) {
       item.subtotal = item.quantity * item.productPrice;
     },
+    updateTotal() {
+      this.total = this.cartItems.reduce((total, item) => total + item.subtotal, 0);
+    },
     getPhotoUrl(photoFile) {
       if (photoFile) {
-        const blob = new Blob([photoFile], { type: 'image/jpeg' });
-        return URL.createObjectURL(blob);
+        // Check if it's a Base64 string; Base64 typically starts with '/9j/' for JPEG images
+        if (photoFile.startsWith('/9j/')) {
+          return `data:image/jpeg;base64,${photoFile}`;
+        } else {
+          // Handle other cases or return a default/placeholder image
+          return 'placeholder_image_url.jpg';
+        }
       } else {
-        return 'placeholder_image_url.jpg';
+        return 'placeholder_image_url.jpg';  // Provide a valid placeholder URL
       }
     }
   },
+
   mounted() {
-    // this.updateCartItemCount();
-    this.fetchCartItems();
+    this.initializeCart();
   },
 };
 </script>
@@ -240,6 +251,8 @@ export default {
 .btn-outline-secondary {
   width: 60px;
   border-color: #e0e0e0;
+//border: none;
+//background-color: transparent;
 }
 
 /* For WebKit-based browsers */
@@ -274,19 +287,19 @@ input[type="number"] {
   display: block;
   /* Ensure it takes a full line for positioning */
   margin: 10px 0px 10px 0px;
-  
+
 }
 
 
-  .striped-bar {
-      width: 100%;
-      height: 10px;
-      background-image: repeating-linear-gradient(45deg,
-          #6fa8dc,
-          #6fa8dc 10px,
-          #428bca 10px,
-          #428bca 20px);
-    }
+.striped-bar {
+  width: 100%;
+  height: 10px;
+  background-image: repeating-linear-gradient(45deg,
+  #6fa8dc,
+  #6fa8dc 10px,
+  #428bca 10px,
+  #428bca 20px);
+}
 .summary-card {
   background-color: #fff;
   border-radius: 4px;
@@ -294,7 +307,27 @@ input[type="number"] {
   padding: 20px;
   max-width: 400px;
 }
+.button-container {
+  text-align: center; /* Centers the button inside the container */
+  padding-top: 20px; /* Adds some spacing above the button */
+}
+.btn-primary {
+  width: 100%; /* Makes the button take full width of its container */
+  background-color: #606060; /* Dark gray for an industrial feel */
+  color: #fff; /* White text for contrast */
+  border: none; /* No border for a clean look */
+  padding: 12px 0; /* Larger padding for better touch area */
+  font-size: 18px; /* Slightly larger text */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease;
 
+  /* Subtle box shadow for a 3D effect */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #505050; /* Slightly lighter gray on hover */
+}
 .summary-title {
   font-size: 20px;
   margin-bottom: 16px;
@@ -312,41 +345,30 @@ input[type="number"] {
   margin-bottom: 20px;
 }
 
-.payment-options {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
-}
-
-.payment-title {
-  font-size: 30px;
-  margin-bottom: 30px;
-}
-.payment-options-container {
-  width: 280px;
-  display: flex;
-  justify-content: space-between;
-}
-.payment-option {
-  text-align: center;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.payment-option-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.payment-icon {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
 .payment-options h3 {
   margin-bottom: 20px;
 }
+.error-message {
+  color: red;
+  font-weight: bold;
+}
+.btn-primary {
+  background-color: #606060; /* Dark gray for an industrial feel */
+  border: none; /* Remove borders for a cleaner look */
+  color: #fff; /* White text for contrast */
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 3px; /* Slight rounding to soften the button */
+  transition: background-color 0.3s ease;
+
+  /* Subtle texturing with a shadow to mimic industrial surfaces */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #505050; /* Slightly lighter gray on hover */
+  cursor: pointer;
+}
+
 </style>
