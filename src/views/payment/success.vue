@@ -34,7 +34,7 @@ export default {
     },
 
     goHome() {
-      this.$router.push('http://localhost:5173/');
+      this.$router.push('/');
     },
     // viewOrder() {
     //   this.$router.push('/order-details');

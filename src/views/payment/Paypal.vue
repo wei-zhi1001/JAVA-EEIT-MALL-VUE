@@ -50,6 +50,7 @@ function onApprove(data, actions) {
     paid.value = true
     window.location.href = 'http://localhost:5173/successPage';
     console.log('Order complete!');
+
 })
 }
 </script>

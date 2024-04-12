@@ -71,7 +71,7 @@
             <div class="summary-title">購物車總計</div>
             <div class="summary-item">
               <span class="item-title">小計</span>
-              <span class="item-price">{{ total }}</span>
+              <span class="total-price">{{ totalAmount }}</span>
             </div>
             <!-- Other summary items if needed -->
             <div class="summary-options">
@@ -102,7 +102,7 @@
 
             <div class="summary-total">
               <span class="total-title">總計</span>
-              <span class="total-price">{{ total }}</span>
+              <span class="total-price">{{ totalAmount }}</span>
             </div>
             <!-- Button wrapper for centering -->
             <div class="button-container">
@@ -131,7 +131,7 @@ export default {
     };
   },
   computed: {
-    total() {
+    totalAmount() {
       return this.cartItems.reduce((total, item) => total + item.subtotal, 0);
     },
   },
