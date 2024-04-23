@@ -4,40 +4,39 @@
     <div class="content-container">
       <div class="profile-card">
         <div class="profile-header">
-          <h1 class="brand-title">APPLE TREE</h1>
           <h6 class="display-4 fw-normal">新增評論</h6>
           <label>訂單編號：{{ order.orderId }}</label>
         </div>
-        <div class="horizontal-divider"></div> <!-- 橫向灰色線 -->
+        <div class="horizontal-divider"></div>
 
-              <div class="container">
-                <form @submit.prevent="submitFeedback">
-                  <div class="form-group">
-                    <label for="feedbackType">類型：</label>
-                    <select v-model="feedback.type" id="feedbackType" required>
-                      <option value="服務態度">服務態度</option>
-                      <option value="商品品質">商品品質</option>
-                      <option value="配送速度">配送速度</option>
-                      <option value="售後服務">售後服務</option>
-                      <option value="其他">其他</option>
-                    </select>
-                  </div>
-                  <p/>
-                  <div class="form-group">
-                    <label for="feedbackDescription" class="form-label">描述：</label>
-                    <textarea v-model="feedback.description" id="feedbackDescription" class="textarea-large" required >配送速度快速，非常滿意</textarea>
-                  </div>
-                  <button type="submit" class="myButton">提交評論</button>
-                </form>
-              </div>
+        <div class="container">
+          <form @submit.prevent="submitFeedback">
+            <div class="form-group">
+              <label for="feedbackType">類型：</label>
+              <select v-model="feedback.type" id="feedbackType" required>
+                <option value="服務態度">服務態度</option>
+                <option value="商品品質">商品品質</option>
+                <option value="配送速度">配送速度</option>
+                <option value="售後服務">售後服務</option>
+                <option value="其他">其他</option>
+              </select>
             </div>
-          </div>
+            <p/>
+            <div class="form-group">
+              <label for="feedbackDescription" class="form-label">描述：</label>
+              <textarea v-model="feedback.description" id="feedbackDescription" class="textarea-large" required >配送速度快速，非常滿意</textarea>
+            </div>
+            <button type="submit" class="myButton">提交評論</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </main>
 
   <div class="modal fade" id="blockedAccountModalUp" tabindex="-1" aria-labelledby="blockedAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header bg-light text-black"> <!-- 更改背景颜色和标题颜色 -->
+        <div class="modal-header bg-light text-black">
           <h5 class="modal-title" id="blockedAccountModalLabel">提示</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -108,27 +107,23 @@ export default {
         description: this.feedback.description,
         feedbackDate: this.feedback.feedbackDate,
         ordersDetailId: this.feedback.ordersDetailId,
-
       }, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
           .then(response => {
-            // 处理响应
             var myModal = new bootstrap.Modal(document.getElementById('blockedAccountModalUp'));
             myModal.show();
             this.$router.push('/MemberCenter/MemberFeedback');
           })
           .catch(error => {
-            // 处理错误
             alert('新增評論失敗！');
             console.error(error);
           });
     },
   },
   unmounted() {
-    // 清空在Store中的订单数据
     const ordersFeedbackStore = OrdersFeedbackStore();
     ordersFeedbackStore.clearOrder();
   }
@@ -138,24 +133,24 @@ export default {
 <style scoped>
 .form-group {
   display: flex;
-  align-items: flex-start; /* 改變此處，讓items在容器的開始處對齊 */
-  margin-bottom: 10px; /* 添加一些底部外邊距 */
+  align-items: flex-start;
+  margin-bottom: 10px;
 }
 
 .form-label {
-  margin-right: 10px; /* 添加標籤右側的一些空間 */
-  white-space: nowrap; /* 防止標籤折行 */
+  margin-right: 10px;
+  white-space: nowrap;
 }
 
 .textarea-large {
-  flex-grow: 1; /* textarea佔據剩餘空間 */
+  flex-grow: 1;
   min-height: 150px;
   padding: 10px;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
-  margin-top: 0; /* 設置適當的margin-top，如果需要 */
+  margin-top: 0;
 }
 
 .main-container {
@@ -183,7 +178,7 @@ export default {
 
 .profile-card {
   width: 100%;
-  max-width: 1000px; /* 設定最大寬度 */
+  max-width: 1000px;
   padding: 20px;
   border-radius: 6px;
   background-color: #fff;
@@ -200,32 +195,27 @@ export default {
   color: #333;
 }
 
-.brand-slogan {
-  font-size: 1em;
-  color: #666;
-}
-
 .horizontal-divider {
   width: 100%;
   height: 1px;
-  background-color: #ccc; /* 淡灰色背景色 */
-  margin-bottom: 20px; /* 根據需要增加下邊距 */
+  background-color: #ccc;
+  margin-bottom: 20px;
 }
 
 .myButton{
   display: block;
   margin: 0 auto;
   width: max-content;
-  background-color: #84C1FF; /* A pleasant green that looks professional */
-  color: #3C3C3C; /* White text for better readability */
-  padding: 10px 20px; /* Sufficient padding for a button */
-  border: none; /* No border to keep it sleek */
-  border-radius: 4px; /* Rounded corners like other inputs */
-  cursor: pointer; /* Cursor pointer to indicate it's clickable */
-  font-size: 16px; /* Slightly larger font size for better visibility */
-  font-weight: bold; /* Bold text for emphasis */
-  text-transform: uppercase; /* Uppercase text for a formal appearance */
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  background-color: #84C1FF;
+  color: #3C3C3C;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
 }
 button:hover {
   background-color: #0056b3;
@@ -235,17 +225,17 @@ button:hover {
   padding: 10px 15px;
   border: black 3px solid !important;
   border-radius: 25px;
-  background-color: white; /* Darker green on hover */
+  background-color: white;
   color: black;
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
-  display: block; /* 確保它是塊級元素 */
-  margin: auto; /* 左邊距自動，推到右側 */
+  display: block;
+  margin: auto;
 }
 
 .myButton:hover {
-  background-color:		black !important; /* For example, a green button */
+  background-color:		black !important;
   color: white;
 }
 </style>

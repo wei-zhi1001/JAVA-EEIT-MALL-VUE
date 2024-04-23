@@ -7,7 +7,7 @@
           <h1 class="brand-title">APPLE TREE</h1>
           <h6 class="display-4 fw-normal">我的會員資料</h6>
         </div>
-        <div class="horizontal-divider"></div> <!-- 橫向灰色線 -->
+        <div class="horizontal-divider"></div>
 
         <div class="profile-body">
           <div v-if="memberdata" class="member-info-container">
@@ -49,7 +49,7 @@
 
 <script>
 import MemberOption from "@/components/MemberOption.vue";
-import { useUserStore } from "@/stores/userStore"; // 假设 userStore 存在于 src/stores 目录下
+import { useUserStore } from "@/stores/userStore";
 import axios from "axios";
 export default {
 
@@ -63,7 +63,6 @@ export default {
   },
   methods: {
     getMemberData(userId) {
-      // const userId = 2;
       axios
           .get(`${this.API_URL}/member/showmemberredata?userId=${userId}`)
           .then((response) => {
@@ -96,12 +95,13 @@ export default {
       const day = ('0' + registerDate.getDate()).slice(-2); // 確保日期是兩位數
       const hours = ('0' + registerDate.getHours()).slice(-2); // 確保小時是兩位數
       const minutes = ('0' + registerDate.getMinutes()).slice(-2); // 確保分鐘是兩位數
-      // 格式化日期時間字串，例如：2024-03-01 00:00
+      // 格式化日期時間字串，2024-03-01 00:00
       return `${year}-${month}-${day} ${hours}:${minutes}`;
     },
   },
 };
 </script>
+
 
 <style scoped>
 .main-content {
@@ -148,16 +148,16 @@ export default {
 }
 
 .sidebar {
-  flex: 0 0 250px; /* 給側邊導航一個固定的寬度 */
-  background-color: #333; /* 灰色背景 */
-  color: #fff; /* 白色文字 */
-  min-height: 100vh; /* Full height */
+  flex: 0 0 250px;
+  background-color: #333;
+  color: #fff;
+  min-height: 100vh;
 }
 
 .content {
-  flex-grow: 1; /* 佔據剩餘的空間 */
+  flex-grow: 1;
   padding: 20px;
-  background-color: #f8f9fa; /* 輕灰色背景 */
+  background-color: #f8f9fa;
 }
 
 .member-info-container {
@@ -175,14 +175,14 @@ export default {
 .member-info-column {
   display: flex;
   flex-direction: column;
-  width: calc(50% - 10px); /* 減去分隔線的空間 */
+  width: calc(50% - 10px);
   text-align: left;
 }
 
 .member-info-divider {
   height: 100%;
   width: 1px;
-  background-color: #ccc; /* 淡灰色分隔線 */
+  background-color: #ccc;
 }
 
 .member-info > div {
@@ -194,8 +194,8 @@ export default {
 .horizontal-divider {
   width: 100%;
   height: 1px;
-  background-color: #ccc; /* 淡灰色背景色 */
-  margin-bottom: 20px; /* 根據需要增加下邊距 */
+  background-color: #ccc;
+  margin-bottom: 20px;
 }
 
 .main-container {
@@ -223,7 +223,7 @@ export default {
 
 .profile-card {
   width: 100%;
-  max-width: 1000px; /* 設定最大寬度 */
+  max-width: 1000px;
   padding: 20px;
   border-radius: 6px;
   background-color: #fff;
@@ -248,8 +248,8 @@ export default {
 .horizontal-divider {
   width: 100%;
   height: 1px;
-  background-color: #ccc; /* 淡灰色背景色 */
-  margin-bottom: 20px; /* 根據需要增加下邊距 */
+  background-color: #ccc;
+  margin-bottom: 20px;
 }
 .member-info-wrapper {
   display: flex;
@@ -297,8 +297,8 @@ export default {
 
 .content-container {
   display: flex;
-  justify-content: center; /* 水平置中 */
-  align-items: center; /* 垂直置中 */
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
   padding: 20px;
   background-color: #f8f9fa;
@@ -306,19 +306,19 @@ export default {
 
 .member-info-container {
   display: flex;
-  flex-direction: column; /* 堆疊方向改為垂直 */
-  align-items: center; /* 垂直置中 */
-  justify-content: center; /* 水平置中 */
-  width: 100%; /* 使其填滿可用寬度 */
-  max-width: 1000px; /* 最大寬度，可根據需要調整 */
-  margin: 0 auto; /* 上下保持原樣，左右自動調整以達到置中 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .member-info-wrapper {
-  width: 100%; /* 使包裹內容填滿容器 */
+  width: 100%;
   display: flex;
-  flex-direction: row; /* 水平排列 */
-  justify-content: space-evenly; /* 內容間距平均分配 */
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: flex-start;
   padding: 15px;
   border-radius: 8px;
@@ -329,13 +329,13 @@ export default {
 .member-info-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 內容靠左對齊 */
+  align-items: flex-start;
 }
 
 .content-container {
   display: flex;
-  justify-content: center; /* 水平置中 */
-  align-items: center; /* 垂直置中 */
+  justify-content: center;
+  align-items: center;
   flex-grow: 1;
   padding: 20px;
   background-color: #f8f9fa;
@@ -343,19 +343,19 @@ export default {
 
 .member-info-container {
   display: flex;
-  flex-direction: column; /* 堆疊方向改為垂直 */
-  align-items: center; /* 垂直置中 */
-  justify-content: center; /* 水平置中 */
-  width: 100%; /* 使其填滿可用寬度 */
-  max-width: 1000px; /* 最大寬度，可根據需要調整 */
-  margin: 0 auto; /* 上下保持原樣，左右自動調整以達到置中 */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .member-info-wrapper {
-  width: 100%; /* 使包裹內容填滿容器 */
+  width: 100%;
   display: flex;
-  flex-direction: row; /* 水平排列 */
-  justify-content: space-evenly; /* 內容間距平均分配 */
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: flex-start;
   padding: 15px;
   border-radius: 8px;
@@ -366,17 +366,16 @@ export default {
 .member-info-group {
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* 內容靠左對齊 */
+  align-items: flex-start;
 }
 .member-info-content {
-  font-size: 16px; /* 調整字體大小 */
-  color: #333; /* 文字顏色 */
-  padding: 6px; /* 輕微的內距 */
-  background-color: transparent; /* 背景設為透明 */
-  border: none; /* 移除邊框 */
-  box-shadow: none; /* 移除陰影 */
-  margin-bottom: 10px; /* 保持底部間隔 */
+  font-size: 16px;
+  color: #333;
+  padding: 6px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-bottom: 10px;
 }
 </style>
-
 

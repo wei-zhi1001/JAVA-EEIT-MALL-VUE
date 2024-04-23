@@ -1,10 +1,7 @@
 <template>
-
   <main>
 <category></category>
     <hr />
-    <!-- 顯示商品區域 -->
-
       <div class="py-1 bg-light">
         <div class="container mb-3">
           <div class="row justify-content-end align-items-center">
@@ -79,7 +76,6 @@ import category from "@/components/category.vue"
 
 export default {
   components: {
-
     category
   },
   data() {
@@ -95,12 +91,9 @@ export default {
         specIds:[],
       },
       searchPage:0,
-
       searchKeyWord: '',
       keywordSearchActive: false,
-
       sortBy: "預設",
-
     };
   },
   mounted() {
@@ -112,12 +105,10 @@ export default {
       const cp = this.currentPage;
       const tp = this.totalPage;
       let arr = [];
-
       if (tp === 1) {
         arr.push(1);
         return arr;
       }
-
       arr.push(1);
       if (cp > 4) {
         arr.push("..");
@@ -151,12 +142,10 @@ export default {
       arr.push(tp);
       return arr;
     },
-
   },
   methods: {
     init() {
       axios.get(`http://localhost:8080/mall/products/0`).then((rs) => {
-
         this.currentPage = rs.data.number + 1;
         this.totalPage = rs.data.totalPages;
         this.products = rs.data.content;
@@ -175,9 +164,8 @@ export default {
         this.currentPage =rs.data.number+1;
         this.totalPage = rs.data.totalPages;
         this.products = rs.data.content;
-        this.keywordSearchActive = true //建立搜尋狀態
+        this.keywordSearchActive = true
       })
-
     },
     redirectToSpec(product) {
       this.$router.push({
@@ -215,7 +203,6 @@ export default {
     watch: {
       currentPage(newVal, oldVal) {
         let newPage = newVal - 1  // 頁碼變化時重新計算currentPage(解決無法讀取第0頁面的狀況)
-
         if (this.keywordSearchActive == true) {  //若已開始搜尋狀態則走搜尋調用的後端方法
           axios.get(`http://localhost:8080/mall/products/findFilterProductByPage/${newPage}?productName=${this.searchKeyWord}`).then((rs) => {
             this.currentPage = rs.data.number + 1;
@@ -224,17 +211,14 @@ export default {
           })
           this.keywordSearchActive = true
 
-      }else{    //一般的商品頁面
+      }else{
         axios.get(`http://localhost:8080/mall/products/${newPage}`).then((rs) => {
           this.totalPage = rs.data.totalPages;
           this.products = rs.data.content;
         })
       }
     },
-
-
   }
-
 };
 </script>
 <style scoped></style>

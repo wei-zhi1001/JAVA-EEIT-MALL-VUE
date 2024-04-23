@@ -1,67 +1,71 @@
 <template>
   <main>
-  <div class="main-container">
-    <MemberOption class="sidebar"></MemberOption>
-    <div class="content-container">
-      <div class="profile-card">
-        <div class="profile-header">
-          <h1 class="brand-title">APPLE TREE</h1>
-          <h1 class="display-4 fw-normal">會員資料修改</h1>
-        </div>
-        <div class="horizontal-divider"></div> <!-- 橫向灰色線 -->
-        <div class="startdiv"> (<span class="start">*</span> 為必填欄位)</div>
-        <div class="form-container">
-          <form @submit.prevent="submitUpdate" class="member-form">
-            <!-- 用戶名表單欄位 -->
-            <div class="form-group" v-if="memberdata">
-              <label for="userName">姓名<span class="start">*</span></label>
-              <input type="text" id="userName" v-model="memberdata.userName" :placeholder="!memberdata.userName ? '必填' : ''" required />
-            </div>
+    <div class="main-container">
+      <MemberOption class="sidebar"></MemberOption>
+      <div class="content-container">
+        <div class="profile-card">
+          <div class="profile-header">
+            <h1 class="brand-title">APPLE TREE</h1>
+            <h1 class="display-4 fw-normal">會員資料修改</h1>
+          </div>
+          <div class="horizontal-divider"></div> <!-- 橫向灰色線 -->
+          <div class="startdiv"> (<span class="start">*</span> 為必填欄位)</div>
+          <div class="form-container">
+            <form @submit.prevent="submitUpdate" class="member-form">
+              <!-- 用戶名表單欄位 -->
+              <div class="form-group" v-if="memberdata">
+                <label for="userName">姓名<span class="start">*</span></label>
+                <input type="text" id="userName" v-model="memberdata.userName"
+                       :placeholder="!memberdata.userName ? '必填' : ''" required/>
+              </div>
 
-            <!-- 電子郵件表單欄位 -->
-            <div class="form-group" v-if="memberdata">
-              <label for="email">電子郵件</label>
-              <input type="email" id="email" v-model="memberdata.email" disabled />
-            </div>
+              <!-- 電子郵件表單欄位 -->
+              <div class="form-group" v-if="memberdata">
+                <label for="email">電子郵件</label>
+                <input type="email" id="email" v-model="memberdata.email" disabled/>
+              </div>
 
-            <!-- 註冊日期表單欄位 -->
-            <div class="form-group" v-if="memberdata">
-              <label for="registerDate">註冊日期</label>
-              <input type="text" id="registerDate" v-model="formattedRegisterDate" disabled />
-            </div>
+              <!-- 註冊日期表單欄位 -->
+              <div class="form-group" v-if="memberdata">
+                <label for="registerDate">註冊日期</label>
+                <input type="text" id="registerDate" v-model="formattedRegisterDate" disabled/>
+              </div>
 
-            <!-- 使用者地址表單欄位 -->
-            <div class="form-group" v-if="memberdata">
-              <label for="address">使用者地址</label>
-              <input type="text" id="address" v-model="inputmemberdata.userAddress"/>
-              <label v-if="shouldShowMissingLabel(memberdata.userAddress,inputmemberdata.userAddress)" class="missing-data-label">尚未有過資料 建議填寫!</label>
-            </div>
+              <!-- 使用者地址表單欄位 -->
+              <div class="form-group" v-if="memberdata">
+                <label for="address">使用者地址</label>
+                <input type="text" id="address" v-model="inputmemberdata.userAddress"/>
+                <label v-if="shouldShowMissingLabel(memberdata.userAddress,inputmemberdata.userAddress)"
+                       class="missing-data-label">尚未有過資料 建議填寫!</label>
+              </div>
 
-            <!-- 遞送地址表單欄位 -->
-            <div class="form-group" v-if="memberdata">
-              <label for="deliverAddress">遞送地址</label>
-              <input type="text" id="deliverAddress" v-model="inputmemberdata.deliverAddress" />
-              <label v-if="shouldShowMissingLabel(memberdata.deliverAddress,inputmemberdata.deliverAddress)" class="missing-data-label">尚未有過資料 建議填寫!</label>
-            </div>
+              <!-- 遞送地址表單欄位 -->
+              <div class="form-group" v-if="memberdata">
+                <label for="deliverAddress">遞送地址</label>
+                <input type="text" id="deliverAddress" v-model="inputmemberdata.deliverAddress"/>
+                <label v-if="shouldShowMissingLabel(memberdata.deliverAddress,inputmemberdata.deliverAddress)"
+                       class="missing-data-label">尚未有過資料 建議填寫!</label>
+              </div>
 
-            <!-- 電話表單欄位 -->
-            <div class="form-group" v-if="memberdata">
-              <label for="phone">電話</label>
-              <input type="tel" id="phone" v-model="inputmemberdata.phone"/>
-              <label v-if="shouldShowMissingLabel(memberdata.phone,inputmemberdata.phone)" class="missing-data-label">尚未有過資料 建議填寫!</label>
-            </div>
+              <!-- 電話表單欄位 -->
+              <div class="form-group" v-if="memberdata">
+                <label for="phone">電話</label>
+                <input type="tel" id="phone" v-model="inputmemberdata.phone"/>
+                <label v-if="shouldShowMissingLabel(memberdata.phone,inputmemberdata.phone)" class="missing-data-label">尚未有過資料
+                  建議填寫!</label>
+              </div>
 
-            <!-- 提交按鈕 -->
-            <div class="form-submit">
-              <button type="submit" class="submit-button">提交更新</button>
-              <div v-if="showsubmitfalseflag" class="error-message">更新失敗，姓名：尚未填寫</div>
-            </div>
+              <!-- 提交按鈕 -->
+              <div class="form-submit">
+                <button type="submit" class="submit-button">提交更新</button>
+                <div v-if="showsubmitfalseflag" class="error-message">更新失敗，姓名：尚未填寫</div>
+              </div>
 
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
   </main>
 
   <div class="modal" v-show="showSuccessModal">
@@ -82,9 +86,8 @@
 
 <script>
 import MemberOption from "@/components/MemberOption.vue";
-import { useUserStore } from "@/stores/userStore"; //user store
+import {useUserStore} from "@/stores/userStore"; //user store
 import axios from "axios";
-
 
 
 export default {
@@ -184,7 +187,7 @@ export default {
 <style scoped>
 .main-container {
   display: flex;
-  min-height: calc(100vh - var(--footer-height));
+//min-height: calc(100vh - var(--footer-height));
 }
 
 .sidebar {
@@ -197,20 +200,19 @@ export default {
 .content-container {
   flex-grow: 1;
   display: flex;
-  justify-content: center; /* 將內容水平居中 */
+  justify-content: center;
   padding: 20px;
   background-color: #f8f9fa;
 }
 
 .profile-card {
   width: 100%;
-  max-width: 700px; /* 設定最大寬度 */
-  margin: auto; /* 上下自動填充，達到垂直居中效果 */
+  max-width: 700px;
+  margin: auto;
   padding: 20px;
   border-radius: 6px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
 }
 
 .profile-header {
@@ -228,69 +230,69 @@ export default {
   color: #666;
 }
 
-
-
-
 .error-message {
   color: red;
   margin-top: 10px;
 }
+
 .horizontal-divider {
   width: 100%;
   height: 1px;
-  background-color: #ccc; /* 淡灰色背景色 */
-  margin-bottom: 20px; /* 根據需要增加下邊距 */
+  background-color: #ccc;
+  margin-bottom: 20px;
 }
 
 .member-form {
   display: flex;
-  flex-direction: column; /* This ensures the stacked layout */
+  flex-direction: column;
 }
 
 .form-group {
-  margin-bottom: 20px; /* Add some space between each form group */
+  margin-bottom: 20px;
 }
 
 .form-group label {
-  display: block; /* Ensures the label is above the input field */
-  margin-bottom: 8px; /* Space between the label and the input field */
+  display: block;
+  margin-bottom: 8px;
 }
 
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="tel"] {
-  width: 100%; /* Full width of the container */
+  width: 100%;
   padding: 10px;
   border: 1px solid #ced4da;
   border-radius: 4px;
 }
 
-/* Style the submit button to match the rest of the form */
+
 .submit-button {
   padding: 10px 15px;
   border-color: black;
   border-radius: 25px;
-  background-color: white; /* For example, a green button */
+  background-color: white;
   color: black;
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
-  display: block; /* 確保它是塊級元素 */
-  margin: auto; /* 左邊距自動，推到右側 */
+  display: block;
+  margin: auto;
 }
 
 .submit-button:hover {
-  background-color: black; /* Darker green on hover */
+  background-color: black;
   color: white;
 }
-.start{
+
+.start {
   color: red;
 }
-.startdiv{
-  display: block; /* 確保它是塊級元素 */
-  text-align: right; /* 文字向右對齊 */
-  margin-left: auto; /* 左邊距自動，推到右側 */
-  margin-right: 20px; /* 右邊距保留一些空間 */
+
+.startdiv {
+  display: block;
+  text-align: right;
+  margin-left: auto;
+  margin-right: 20px;
 }
 
 .modal {
@@ -310,7 +312,7 @@ export default {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .modal-header,
@@ -334,29 +336,31 @@ export default {
   border: rgba(0, 0, 0, 0) solid 3px !important;
   border-radius: 6px;
   width: 50%;
-  background-color:  rgba(0, 0, 0, 0.05); /* For example, a green button */
+  background-color: rgba(0, 0, 0, 0.05);
   color: black;
   cursor: pointer;
   font-weight: bold;
   text-transform: uppercase;
-  display: block; /* 確保它是塊級元素 */
-  margin: auto; /* 左邊距自動，推到右側 */
+  display: block;
+  margin: auto;
 }
+
 .btn1:hover {
-  background-color:  rgba(0, 0, 0, 0.15); /* Darker green on hover */
-  color: black;
-}
-.btn2{
-border: rgba(0, 0, 0, 0) solid 3px !important;
-background-color: white; /* For example, a green button */
-color: black;
-cursor: pointer;
-}
-.btn2:hover {
-  background-color: rgba(0, 0, 0, 0) !important; /* Darker green on hover */
+  background-color: rgba(0, 0, 0, 0.15);
   color: black;
 }
 
+.btn2 {
+  border: rgba(0, 0, 0, 0) solid 3px !important;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.btn2:hover {
+  background-color: rgba(0, 0, 0, 0) !important;
+  color: black;
+}
 
 .modal {
   border-color: black !important;
@@ -378,13 +382,13 @@ cursor: pointer;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 25%; /* 控制模態框的寬度 */
-  max-width: 600px; /* 確保模態框不會超過這個最大寬度 */
+  width: 25%;
+  max-width: 600px;
   box-sizing: border-box;
 }
 
-.modal-title{
-  font-weight:  800;
+.modal-title {
+  font-weight: 800;
 }
 </style>
 

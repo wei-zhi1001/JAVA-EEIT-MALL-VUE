@@ -56,8 +56,8 @@ export default {
     return {
       tracks: [],
       trackDTO: {
-        userID: null, // 初始化為空，等待登錄後填充
-        specID: null, // 初始化為空，等待需要時填充
+        userID: null,
+        specID: null,
       },
     };
   },

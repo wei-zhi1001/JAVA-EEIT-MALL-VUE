@@ -265,5 +265,4 @@ export default {
   background-color: #ccc;
   margin-bottom: 20px;
 }
-
 </style>

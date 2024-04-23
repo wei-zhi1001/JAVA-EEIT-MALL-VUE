@@ -6,7 +6,7 @@
         <div class="profile-header">
           <h1 class="brand-title">APPLE TREE</h1>
         </div>
-        <div class="horizontal-divider"></div> <!-- 橫向灰色線 -->
+        <div class="horizontal-divider"></div>
 
         <div
             class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light"

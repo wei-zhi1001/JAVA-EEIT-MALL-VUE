@@ -15,14 +15,14 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0">
                         <input
-                          type="text"
-                          id="form3Example1c"
-                          class="form-control"
-                          v-model="name"
-                          required
+                            type="text"
+                            id="form3Example1c"
+                            class="form-control"
+                            v-model="name"
+                            required
                         />
                         <label class="form-label" for="form3Example1c"
-                          >Your Name</label
+                        >Your Name</label
                         >
                       </div>
                     </div>
@@ -30,44 +30,45 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0">
                         <input
-                          type="email"
-                          id="form3Example3c"
-                          class="form-control"
-                          v-model="email"
-                          required
+                            type="email"
+                            id="form3Example3c"
+                            class="form-control"
+                            v-model="email"
+                            required
                         />
                         <label class="form-label" for="form3Example3c"
-                          >Your Email &nbsp;&nbsp;</label
-                        ><button
-                          type="button"
-                          class="btn btn-outline-primary btn-sm"
-                          @click="generateVerificationCode"
-                          :disabled="disableButton"
+                        >Your Email &nbsp;&nbsp;</label
+                        >
+                        <button
+                            type="button"
+                            class="btn btn-outline-primary btn-sm"
+                            @click="generateVerificationCode"
+                            :disabled="disableButton"
                         >
                           驗證
                         </button>
                         <span :style="{ color: 'red' }">{{ message2 }}</span>
-                          <div class="spinner-border spinner-border-sm " role="status" v-if="loading">
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
+                        <div class="spinner-border spinner-border-sm " role="status" v-if="loading">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
                       </div>
                     </div>
 
                     <div
-                      v-if="showVerificationCode"
-                      class="d-flex flex-row align-items-center mb-4 col-auto"
+                        v-if="showVerificationCode"
+                        class="d-flex flex-row align-items-center mb-4 col-auto"
                     >
                       <div class="col-sm-">
                         <div class="form-outline flex-fill mb-0">
                           <input
-                            type="text"
-                            id="verificationCode"
-                            class="form-control"
-                            v-model="verificationCode2"
-                            required
+                              type="text"
+                              id="verificationCode"
+                              class="form-control"
+                              v-model="verificationCode2"
+                              required
                           />
                           <label class="form-label" for="verificationCode"
-                            >Verification Code</label
+                          >Verification Code</label
                           >
                         </div>
                       </div>
@@ -76,14 +77,14 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0">
                         <input
-                          type="text"
-                          id="form3Example3b"
-                          class="form-control"
-                          v-model="phone"
-                          required
+                            type="text"
+                            id="form3Example3b"
+                            class="form-control"
+                            v-model="phone"
+                            required
                         />
                         <label class="form-label" for="form3Example3c"
-                          >Your Phone</label
+                        >Your Phone</label
                         >
                       </div>
                     </div>
@@ -91,14 +92,14 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0">
                         <input
-                          type="password"
-                          id="form3Example4c"
-                          class="form-control"
-                          v-model="password"
-                          required
+                            type="password"
+                            id="form3Example4c"
+                            class="form-control"
+                            v-model="password"
+                            required
                         />
                         <label class="form-label" for="form3Example4c"
-                          >Password</label
+                        >Password</label
                         >
                       </div>
                     </div>
@@ -106,25 +107,25 @@
                     <div class="d-flex flex-row align-items-center mb-4">
                       <div class="form-outline flex-fill mb-0">
                         <input
-                          type="password"
-                          id="form3Example4cd"
-                          class="form-control"
-                          v-model="password2"
-                          required
+                            type="password"
+                            id="form3Example4cd"
+                            class="form-control"
+                            v-model="password2"
+                            required
                         />
                         <label class="form-label" for="form3Example4cd"
-                          >Repeat your password</label
+                        >Repeat your password</label
                         >
                       </div>
                     </div>
 
                     <div class="form-check d-flex justify-content-center mb-5">
                       <input
-                        class="form-check-input me-2"
-                        type="checkbox"
-                        value=""
-                        id="form2Example3c"
-                        v-model="check"
+                          class="form-check-input me-2"
+                          type="checkbox"
+                          value=""
+                          id="form2Example3c"
+                          v-model="check"
                       />
                       <label class="form-check-label" for="form2Example3">
                         I agree all statements in
@@ -133,12 +134,12 @@
                     </div>
 
                     <div
-                      class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
+                        class="d-flex justify-content-center mx-4 mb-3 mb-lg-4"
                     >
                       <button
-                        type="button"
-                        class="btn btn-primary btn-lg"
-                        @click.prevent="register"
+                          type="button"
+                          class="btn btn-primary btn-lg"
+                          @click.prevent="register"
                       >
                         Register
                       </button>
@@ -158,6 +159,7 @@
 </template>
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
@@ -173,12 +175,12 @@ export default {
       message: "",
       message2: "",
       disableButton: false,
-      loading:false,
+      loading: false,
     };
   },
   methods: {
     register() {
-      if (this.verificationCode2===""||this.verificationCode2 !== this.verificationCode) {
+      if (this.verificationCode2 === "" || this.verificationCode2 !== this.verificationCode) {
         this.message = "驗證碼錯誤";
       } else if (this.password !== this.password2) {
         this.message = "兩次輸入的密碼不相符";
@@ -192,13 +194,13 @@ export default {
         fd.append("password", this.password);
 
         axios
-          .post(`${this.API_URL}/user/register`, fd)
-          .then((rs) => {
-            this.$router.push("/");
-          })
-          .catch(() => {
-            this.message = "註冊失敗，已存在的信箱！";
-          });
+            .post(`${this.API_URL}/user/register`, fd)
+            .then((rs) => {
+              this.$router.push("/");
+            })
+            .catch(() => {
+              this.message = "註冊失敗，已存在的信箱！";
+            });
       }
     },
     validateEmail(email) {
@@ -207,7 +209,7 @@ export default {
     },
     generateRandomCode() {
       const chars =
-        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
       let code = "";
       for (let i = 0; i < 5; i++) {
         const randomIndex = Math.floor(Math.random() * chars.length);
@@ -229,19 +231,19 @@ export default {
         fd.append("verificationCode", this.verificationCode);
 
         axios
-          .post(`${this.API_URL}/user/mail/verify`, fd)
-          .then((rs) => {
-            this.message2 = "  驗證碼已發送至您的信箱！";
-            this.loading = false;
-            this.showVerificationCode = true;
-          })
-          .catch(() => {
-            this.message = "驗證失敗";
-          });
+            .post(`${this.API_URL}/user/mail/verify`, fd)
+            .then((rs) => {
+              this.message2 = "  驗證碼已發送至您的信箱！";
+              this.loading = false;
+              this.showVerificationCode = true;
+            })
+            .catch(() => {
+              this.message = "驗證失敗";
+            });
 
         setTimeout(() => {
           this.message2 =
-            "  沒有收到驗證碼？請檢查信箱是否正確後，再次點擊驗證。";
+              "  沒有收到驗證碼？請檢查信箱是否正確後，再次點擊驗證。";
           this.disableButton = false; // 啟用按鈕
         }, 30000);
         setTimeout(() => {

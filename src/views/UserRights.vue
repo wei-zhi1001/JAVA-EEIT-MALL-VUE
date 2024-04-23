@@ -4,13 +4,9 @@
     <div class="content-container">
       <div class="profile-card">
         <div class="profile-header">
-          <h1 class="brand-title">APPLE TREE</h1>
           <h1 class="display-4 fw-normal">客戶權益聲明</h1>
         </div>
-        <div class="horizontal-divider"></div> <!-- 橫向灰色線 -->
-
-
-
+        <div class="horizontal-divider"></div>
         <pre class="lead fw-normal">
 v.20130315
 歡迎來到本網站 為了保障您的權益，在註冊前請先詳細閱讀本會員規範之所有內容，當您選擇完成註冊即視為您已閱讀本會員規範，並同意遵守以下所有規範內容。若您不同意以下所述全部或部分規範內容，您即無法完成會員註冊，將無法使用網站部分服務或參與相關活動。
@@ -127,7 +123,6 @@ export default {
 </script>
 
 <style scoped>
-
 .main-container {
   display: flex;
   min-height: 100vh;
@@ -170,14 +165,10 @@ export default {
   color: #333;
 }
 
-
 .horizontal-divider {
   width: 100%;
   height: 1px;
   background-color: #ccc; /* 淡灰色背景色 */
   margin-bottom: 20px; /* 根據需要增加下邊距 */
 }
-
-
-
 </style>

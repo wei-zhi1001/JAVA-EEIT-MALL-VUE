@@ -4,7 +4,6 @@
     <div class="content-container">
       <div class="profile-card">
         <div class="profile-header">
-          <h1 class="brand-title">AppleTree</h1>
           <h1 class="display-4 fw-normal">會員權益</h1>
         </div>
         <div class="horizontal-divider"></div>
