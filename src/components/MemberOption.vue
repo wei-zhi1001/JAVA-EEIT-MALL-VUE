@@ -64,14 +64,7 @@
           <label>客戶服務</label>
 
           <ul class="list-group mt-2">
-            <li class="list-group-item">
-              <router-link
-                to="/MemberCenter/MemberFeedback"
-                class="nav-link px-2 text-white"
-              >
-                <label>我的意見反應</label>
-              </router-link>
-            </li>
+
             <li class="list-group-item">
               <router-link
                   to="/MemberCenter/CustomerFeedbackAdd"
@@ -80,12 +73,13 @@
                 <label>填寫訂單意見</label>
               </router-link>
             </li>
+
             <li class="list-group-item">
               <router-link
-                  to="/MemberCenter/CustomerFeedbackAdd"
-                  class="nav-link px-2 text-white"
+                to="/MemberCenter/MemberFeedback"
+                class="nav-link px-2 text-white"
               >
-                填寫訂單意見
+                <label>我的意見反應</label>
               </router-link>
             </li>
 
